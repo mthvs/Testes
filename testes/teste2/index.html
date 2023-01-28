@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2ª Teste</title>
+    <style>
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .content {
+            width: 300px;
+            height: 450px;
+            background-color: grey;
+            margin: 10px;
+            text-align: center;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .content .list {
+            color: #fff;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content menor">
+        Menor que 21 <br>
+        <div class="list">
+
+        </div>
+    </div>
+    <div class="content maior">
+        Maior igual a 21 <br>
+
+        <div class="list">
+
+        </div>
+    </div>
+    <!--
+        A constante [pessoas] contém uma lista de pessoas, o objetivo é você percorrer essa lista
+        e separar as pessoas maiores e iguais a 21, das menores que 21, e colocar na sua respectiva div de classe list.
+
+        Lembrando que as pessoas que tiverem exatamente 18 anos pintar o texto de verde.
+     -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="./pessoas.js"></script>
+    <script type="application/javascript">
+
+        window.addEventListener('load', () => {
+            const pessoas = Pessoas.pessoa();
+            const list = document.getElementsByClassName('list')
+            let menor = []
+            let maior = []
+
+            pessoas.forEach(element => {
+                if (element.idade < 21) {
+                    menor.push(element)
+
+                } else
+                    maior.push(element)
+
+            });
+
+            list[0].innerHTML =
+                "<ul>" +
+                menor
+                    .map((e) => {
+                        return e.idade == 18
+                            ? "<li class=igual>" + e.nome + " " + e.idade + "</li>"
+                            : "<li id=nao-dezoito>" + e.nome + " " + e.idade + "</li>";
+                    })
+                    .join("") +
+                "</ul>";
+
+            list[1].innerHTML =
+                "<ul>" +
+                maior
+                    .map((e) => {
+                        return "<li>" + e.nome + " " + e.idade + "</li>";
+                    })
+                    .join("") +
+                "</ul>";
+
+            var els = document.getElementsByClassName("igual");
+            console.log(els)
+            for (var i = 0; i < els.length; i++) {
+                els[i].style.color = "green";
+            }
+
+        })
+    </script>
+</body>
+
+</html>
